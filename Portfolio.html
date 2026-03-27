@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayush Bhatnagar Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+/* ===== RESET ===== */
+* {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
+body {
+  background: linear-gradient(-45deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-size: 400% 400%;
+  animation: bgMove 20s ease infinite;
+  color: #fff;
+}
+@keyframes bgMove {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%;}
+}
+
+/* ===== GENERAL ===== */
+section {padding:80px 20px;}
+.container {max-width:1100px; margin:auto;}
+
+/* ===== NAVBAR ===== */
+nav {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px; backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.1); border-radius:15px; margin:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+}
+nav h1 {
+  font-family:'Pacifico', cursive; font-size:2rem;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+nav a {
+  color:white; text-decoration:none; margin-left:25px; font-weight:500; transition:0.3s;
+}
+nav a:hover {color:#43cea2;}
+
+/* ===== HERO ===== */
+.hero {text-align:center; margin-top:60px;}
+.hero h2 {
+  font-size:3rem; font-family:'Pacifico',cursive;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+}
+.hero p {font-size:1.2rem; color:#eee;}
+
+/* ===== ABOUT ===== */
+.about {display:flex; flex-direction:column; align-items:center; text-align:center;}
+.about p {max-width:800px; font-size:1.1rem; line-height:1.8; margin-top:15px;}
+
+/* ===== PROJECTS ===== */
+.projects {text-align:center;}
+.projects h2 {
+  font-family:'Pacifico',cursive; font-size:2.5rem; margin-bottom:40px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.project-cards {
+  display:flex; justify-content:space-around; flex-wrap:wrap; gap:25px;
+}
+.card {
+  background: rgba(255,255,255,0.05); backdrop-filter:blur(20px);
+  border-radius:25px; padding:30px; width:300px; transition:0.5s;
+  box-shadow:0 8px 30px rgba(0,0,0,0.4);
+}
+.card:hover {
+  transform:translateY(-10px);
+  box-shadow:0 15px 45px rgba(0,0,0,0.6);
+}
+.card h3 {
+  margin-bottom:15px; font-size:1.5rem;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.card p {font-size:1rem; line-height:1.5; color:#eee;}
+
+/* ===== CONTACT ===== */
+.contact {text-align:center;}
+.contact h2 {
+  font-family:'Pacifico',cursive; font-size:2.5rem; margin-bottom:30px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b, #43cea2, #185a9d);
+  background-clip:text; -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.contact form {max-width:500px; margin:auto; display:flex; flex-direction:column;}
+.contact input, .contact textarea {
+  padding:12px 15px; margin-bottom:15px; border-radius:15px; border:none; outline:none;
+  background:rgba(255,255,255,0.15); color:white; font-size:1rem; transition:0.3s;
+}
+.contact input:focus, .contact textarea:focus {
+  background: rgba(255,255,255,0.35); box-shadow:0 0 15px rgba(255,255,255,0.5);
+}
+.contact button {
+  padding:15px; border:none; border-radius:50px; font-weight:600;
+  background: linear-gradient(135deg, #43cea2, #185a9d, #ff7e5f);
+  cursor:pointer; transition:0.3s;
+}
+.contact button:hover {transform:scale(1.05); box-shadow:0 12px 40px rgba(0,0,0,0.5);}
+
+/* ===== FOOTER ===== */
+footer {text-align:center; padding:20px; margin-top:40px; font-size:0.9rem; color:#eee;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){.project-cards{flex-direction:column; align-items:center;}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <h1>Ayush Bhatnagar</h1>
+  <div>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h2>Hello, I'm Ayush Bhatnagar</h2>
+  <p>A passionate web developer creating dynamic, modern websites with clean UI/UX and professional design.</p>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <h2>About Me</h2>
+  <p>I'm Ayush Bhatnagar, a frontend developer who loves designing ultra-pro websites with responsive and clean interfaces. My goal is to create experiences that are visually stunning and highly user-friendly. I thrive on turning complex ideas into elegant, dynamic web solutions.</p>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects">
+  <h2>My Projects</h2>
+  <div class="project-cards">
+    <div class="card">
+      <h3>Login/Signup Page</h3>
+      <p>A fully designed login and signup page with ultra-pro UI/UX, glassmorphic effects, gradients, and social login buttons. Pure CSS design without JS.</p>
+    </div>
+    <div class="card">
+      <h3>Ride Saathi</h3>
+      <p>A travel website I built to help users plan and book trips efficiently. Beautiful UI/UX, responsive design, and interactive elements make planning trips fun and easy.</p>
+    </div>
+    <div class="card">
+      <h3>Study Planner</h3>
+      <p>A productivity tool to help students organize study schedules, track tasks, and improve time management. Features clean design, responsive layouts, and user-friendly interface.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <h2>Contact Me</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 Ayush Bhatnagar. All rights reserved.
+</footer>
+
+</body>
+</html>
