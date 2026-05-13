@@ -5,11 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayush Bhatnagar — CS-AI Developer</title>
+  <meta name="description"
+    content="Ayush Bhatnagar — First-year B.Tech CS-AI student, frontend developer & AI enthusiast. Building AI-powered voice interfaces, enterprise fairness auditors, and open-source tools. GSoC 2026 contributor.">
+  <meta property="og:title" content="Ayush Bhatnagar — CS-AI Developer">
+  <meta property="og:description"
+    content="Frontend developer & AI enthusiast building ultra-modern digital experiences. GSoC 2026 contributor, hackathon leader, and open-source advocate.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="Photo.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/x-icon" href="portfolio.ico">
   <link rel="shortcut icon" type="image/x-icon" href="portfolio.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #060810;
@@ -1150,6 +1162,14 @@
         display: none;
       }
 
+      .nav-cta {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
       .hero {
         padding: 100px 20px 60px;
       }
@@ -1202,6 +1222,79 @@
       animation: blink 1s step-end infinite;
     }
 
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(6, 8, 16, 0.95);
+      backdrop-filter: blur(24px);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    /* ── FOCUS STYLES ── */
+    *:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     @keyframes blink {
 
       from,
@@ -1232,7 +1325,21 @@
       <a href="#contact">Contact</a>
     </div>
     <a href="#contact" class="nav-cta">Hire Me →</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn-primary" style="margin-top:16px;font-size:1rem">Hire Me →</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -1295,7 +1402,7 @@
   <section id="about">
     <div class="container">
       <div class="section-label">01 — About Me</div>
-      <div class="section-title">Who I <em>Am</em></div>
+      <h2 class="section-title">Who I <em>Am</em></h2>
       <div class="about-grid">
         <div class="about-text reveal">
           <p>I'm <strong>Ayush Bhatnagar</strong>, a first-year B.Tech CS-AI student at <strong>G.L Bajaj Institute of
@@ -1355,7 +1462,7 @@
   <section id="skills">
     <div class="container">
       <div class="section-label">02 — Skills</div>
-      <div class="section-title">My <em>Toolkit</em></div>
+      <h2 class="section-title">My <em>Toolkit</em></h2>
       <div class="skills-layout">
         <div class="skill-group reveal">
           <div class="skill-group-title lang">// Languages</div>
@@ -1373,13 +1480,7 @@
             </div>
             <span class="skill-level">Proficient</span>
           </div>
-          <div class="skill-item">
-            <span class="skill-name">JavaScript</span>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar lang" style="width:55%"></div>
-            </div>
-            <span class="skill-level">Learning</span>
-          </div>
+
           <div class="skill-item">
             <span class="skill-name">DSA (C++)</span>
             <div class="skill-bar-wrap">
@@ -1460,7 +1561,7 @@
   <section id="projects">
     <div class="container">
       <div class="section-label">03 — Projects</div>
-      <div class="section-title">Things I've <em>Built</em></div>
+      <h2 class="section-title">Things I've <em>Built</em></h2>
       <div class="projects-grid">
 
         <!-- BiasLens — Featured -->
@@ -1560,7 +1661,7 @@
   <section id="achievements">
     <div class="container">
       <div class="section-label">04 — Achievements</div>
-      <div class="section-title">What I've <em>Done</em></div>
+      <h2 class="section-title">What I've <em>Done</em></h2>
       <div class="achievements-list">
 
         <div class="achievement-item reveal">
@@ -1618,28 +1719,28 @@
   <section id="contact">
     <div class="container">
       <div class="section-label">05 — Contact</div>
-      <div class="section-title">Let's <em>Connect</em></div>
+      <h2 class="section-title">Let's <em>Connect</em></h2>
       <div class="contact-grid">
         <div class="contact-info reveal">
           <h3>Got an idea? Let's build it.</h3>
           <p>Whether you're looking for a collaborator, have a project in mind, or just want to say hi — my inbox is
             always open. I'm especially excited about AI, open-source, and design-forward web projects.</p>
           <div class="contact-links">
-            <a href="mailto:ayush@example.com" class="contact-link">
+            <a href="mailto:ayushbhatnagar71@gmail.com" class="contact-link">
               <span class="contact-link-icon">📧</span>
               <div>
                 <div class="contact-link-label">Email</div>
                 <div class="contact-link-text">ayushbhatnagar71@gmail.com</div>
               </div>
             </a>
-            <a href="https://github.com/" target="_blank" class="contact-link">
+            <a href="https://github.com/ayush-devcore/" target="_blank" class="contact-link">
               <span class="contact-link-icon">🐙</span>
               <div>
                 <div class="contact-link-label">GitHub</div>
                 <div class="contact-link-text">https://github.com/ayush-devcore/</div>
               </div>
             </a>
-            <a href="https://linkedin.com/" target="_blank" class="contact-link">
+            <a href="https://www.linkedin.com/in/ayush-bhatnagar-dev/" target="_blank" class="contact-link">
               <span class="contact-link-icon">💼</span>
               <div>
                 <div class="contact-link-label">LinkedIn</div>
@@ -1659,24 +1760,26 @@
           <form action="https://formspree.io/f/mqewwrye" method="POST" class="contact-form">
 
             <div class="form-group">
-              <label class="form-label">Your Name</label>
-              <input type="text" name="name" class="form-input" placeholder="John Smith" required>
+              <label class="form-label" for="contact-name">Your Name</label>
+              <input type="text" name="name" id="contact-name" class="form-input" placeholder="John Smith" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+              <label class="form-label" for="contact-email">Email Address</label>
+              <input type="email" name="email" id="contact-email" class="form-input" placeholder="john@example.com"
+                required>
             </div>
 
             <div class="form-group">
-              <label class="form-label">Subject</label>
-              <input type="text" name="subject" class="form-input" placeholder="Let's collaborate!">
+              <label class="form-label" for="contact-subject">Subject</label>
+              <input type="text" name="subject" id="contact-subject" class="form-input"
+                placeholder="Let's collaborate!">
             </div>
 
             <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea name="message" class="form-textarea" placeholder="Tell me about your project or idea..."
-                required></textarea>
+              <label class="form-label" for="contact-message">Message</label>
+              <textarea name="message" id="contact-message" class="form-textarea"
+                placeholder="Tell me about your project or idea..." required></textarea>
             </div>
 
             <button type="submit" class="form-btn">Send Message →</button>
@@ -1684,7 +1787,6 @@
           </form>
         </div>
       </div>
-    </div>
     </div>
   </section>
 
@@ -1700,16 +1802,18 @@
   </footer>
 
   <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const cursorRing = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-    (function ringLoop() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; requestAnimationFrame(ringLoop); })();
-    document.querySelectorAll('a,button,.project-card,.highlight-card,.achievement-item').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)'; cursorRing.style.borderColor = 'rgba(99,210,255,0.8)'; });
-      el.addEventListener('mouseleave', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.borderColor = 'var(--accent)'; });
-    });
+    // Custom cursor (only on devices with a fine pointer)
+    if (matchMedia('(pointer: fine)').matches) {
+      const cursor = document.getElementById('cursor');
+      const cursorRing = document.getElementById('cursorRing');
+      let mx = 0, my = 0, rx = 0, ry = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+      (function ringLoop() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; requestAnimationFrame(ringLoop); })();
+      document.querySelectorAll('a,button,.project-card,.highlight-card,.achievement-item').forEach(el => {
+        el.addEventListener('mouseenter', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)'; cursorRing.style.borderColor = 'rgba(99,210,255,0.8)'; });
+        el.addEventListener('mouseleave', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.borderColor = 'var(--accent)'; });
+      });
+    }
 
     // Scroll reveal
     const observer = new IntersectionObserver(entries => {
@@ -1762,11 +1866,19 @@
           submitBtn.textContent = 'Error sending message.';
           submitBtn.style.background = '#ef4444';
           submitBtn.style.opacity = '1';
+          setTimeout(() => {
+            submitBtn.textContent = 'Send Message →';
+            submitBtn.style.background = 'var(--accent)';
+          }, 4000);
         }
       } catch (error) {
         submitBtn.textContent = 'Error sending message.';
-        submitBtn.style.background = '#ef4444'; // Red error state
+        submitBtn.style.background = '#ef4444';
         submitBtn.style.opacity = '1';
+        setTimeout(() => {
+          submitBtn.textContent = 'Send Message →';
+          submitBtn.style.background = 'var(--accent)';
+        }, 4000);
       }
     });
 
@@ -1783,6 +1895,22 @@
       });
     }, { threshold: 0.3 });
     document.querySelectorAll('.skill-group').forEach(g => skillObserver.observe(g));
+
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
   </script>
 </body>
 
