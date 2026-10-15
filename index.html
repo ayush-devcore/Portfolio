@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ayush Bhatnagar — CS-AI Developer</title>
   <meta name="description"
-    content="Ayush Bhatnagar — First-year B.Tech CS-AI student, frontend developer & AI enthusiast. Building AI-powered voice interfaces, enterprise fairness auditors, and open-source tools. GSoC 2026 contributor.">
+    content="Ayush Bhatnagar — second-year CS-AI developer building AI workspaces, secure messaging, connected products, and playful digital experiences. Explore ten projects.">
   <meta property="og:title" content="Ayush Bhatnagar — CS-AI Developer">
   <meta property="og:description"
     content="Frontend developer & AI enthusiast building ultra-modern digital experiences. GSoC 2026 contributor, hackathon leader, and open-source advocate.">
@@ -24,17 +24,17 @@
   <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #060810;
-      --surface: #0d1220;
-      --surface2: #131929;
-      --border: rgba(99, 210, 255, 0.12);
-      --accent: #63d2ff;
-      --accent2: #a78bfa;
-      --accent3: #34d399;
-      --accent4: #fb923c;
-      --text: #e8f0fe;
-      --muted: #7b8db0;
-      --glow: rgba(99, 210, 255, 0.15);
+      --bg: #08090a;
+      --surface: #111315;
+      --surface2: #1a1d1f;
+      --border: rgba(255, 255, 255, .12);
+      --accent: #c7ff54;
+      --accent2: #ff795c;
+      --accent3: #c7ff54;
+      --accent4: #65dfcb;
+      --text: #f4f5f0;
+      --muted: #a1a6a0;
+      --glow: rgba(199, 255, 84, .14);
     }
 
     *,
@@ -50,7 +50,10 @@
     }
 
     body {
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse at 7% 6%, rgba(112, 72, 232, .12), transparent 31rem),
+        radial-gradient(ellipse at 94% 25%, rgba(241, 106, 85, .10), transparent 34rem),
+        var(--bg);
       color: var(--text);
       font-family: 'Cabinet Grotesk', sans-serif;
       overflow-x: hidden;
@@ -65,15 +68,14 @@
     /* ── CUSTOM CURSOR ── */
     .cursor {
       position: fixed;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: var(--accent);
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s;
-      mix-blend-mode: difference;
+      transform: translate3d(-100px,-100px,0);
+      transition: width .2s ease, height .2s ease;
     }
 
     .cursor-ring {
@@ -84,13 +86,13 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: all 0.15s ease;
+      transform: translate3d(-100px,-100px,0);
+      transition: width .22s ease, height .22s ease, border-color .22s ease;
       opacity: 0.6;
     }
 
     body:hover .cursor {
-      transform: translate(-50%, -50%) scale(1);
+      transform: translate3d(-100px,-100px,0);
     }
 
     /* ── NOISE OVERLAY ── */
@@ -98,7 +100,7 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      display: none;
       pointer-events: none;
       z-index: 0;
       opacity: 0.35;
@@ -109,8 +111,8 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image: linear-gradient(rgba(99, 210, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99, 210, 255, 0.03) 1px, transparent 1px);
-      background-size: 80px 80px;
+      background-image: linear-gradient(rgba(76, 56, 129, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(76, 56, 129, .045) 1px, transparent 1px);
+      background-size: 72px 72px;
       pointer-events: none;
       z-index: 0;
     }
@@ -118,17 +120,20 @@
     /* ── NAVBAR ── */
     nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 16px;
+      left: clamp(18px, 4vw, 64px);
+      right: clamp(18px, 4vw, 64px);
       z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
-      background: rgba(6, 8, 16, 0.7);
-      backdrop-filter: blur(24px);
+      padding: 12px 18px 12px 24px;
+      background: rgba(255, 253, 253, .84);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 999px;
+      box-shadow: 0 10px 34px rgba(47, 33, 83, .10);
     }
 
     .nav-logo {
@@ -183,20 +188,33 @@
       font-family: 'DM Mono', monospace;
       font-size: 0.78rem;
       background: var(--accent);
-      color: var(--bg);
+      color: #fffdf8;
       padding: 10px 22px;
-      border-radius: 4px;
+      border-radius: 999px;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      transition: all 0.2s;
+      transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
     }
 
     .nav-cta:hover {
-      background: white;
-      transform: translateY(-1px);
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-2px) scale(1.02);
     }
+    .nav-cta span {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      margin: -5px -14px -5px 2px;
+      border-radius: 50%;
+      background: var(--accent3);
+      color: var(--text);
+      transition: transform .2s ease;
+    }
+    .nav-cta:hover span { transform: rotate(35deg); }
 
     /* ── HERO ── */
     .hero {
@@ -212,8 +230,29 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      background: radial-gradient(ellipse 900px 700px at 80% 50%, rgba(99, 210, 255, 0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 600px 600px at 10% 80%, rgba(167, 139, 250, 0.07) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 620px 560px at 78% 47%, rgba(112, 72, 232, .13), transparent 70%),
+        radial-gradient(ellipse 460px 400px at 6% 80%, rgba(241, 106, 85, .10), transparent 70%),
+        radial-gradient(ellipse 420px 360px at 80% 92%, rgba(198, 235, 93, .14), transparent 70%);
+    }
+
+    .scene-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: .82;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 28%;
+      pointer-events: none;
+      background: linear-gradient(transparent, var(--bg));
+      z-index: 1;
     }
 
     .hero-grid {
@@ -225,7 +264,7 @@
       margin: auto;
       width: 100%;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .hero-eyebrow {
@@ -275,6 +314,12 @@
       letter-spacing: -0.01em;
     }
 
+    #roleCycle {
+      display: inline-block;
+      color: var(--accent);
+      transition: opacity .22s, transform .22s;
+    }
+
     .hero-title span {
       color: var(--accent2);
     }
@@ -295,35 +340,40 @@
 
     .btn-primary {
       background: var(--accent);
-      color: var(--bg);
-      padding: 14px 32px;
-      border-radius: 4px;
+      color: #fffdf8;
+      padding: 15px 30px;
+      border-radius: 999px;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 0.03em;
-      transition: all 0.2s;
+      transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 8px 18px rgba(112, 72, 232, .22);
     }
 
     .btn-primary:hover {
-      background: white;
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(99, 210, 255, 0.3);
+      background: var(--text);
+      color: #fffdf8;
+      transform: translateY(-2px) scale(1.025);
+      box-shadow: 0 12px 24px rgba(47, 33, 83, .20);
     }
 
     .btn-outline {
       border: 1px solid var(--border);
       color: var(--text);
       padding: 14px 32px;
-      border-radius: 4px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
       letter-spacing: 0.03em;
-      transition: all 0.2s;
+      transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
     }
 
     .btn-outline:hover {
@@ -340,6 +390,9 @@
       padding: 40px;
       position: relative;
       overflow: hidden;
+      transform-style: preserve-3d;
+      box-shadow: 0 18px 50px rgba(27, 51, 36, .10);
+      transition: transform .22s ease, box-shadow .22s ease;
     }
 
     .hero-card::before {
@@ -377,7 +430,7 @@
       align-items: center;
       justify-content: center;
       font-size: 3rem;
-      background: linear-gradient(135deg, rgba(99, 210, 255, 0.1), rgba(167, 139, 250, 0.1));
+      background: linear-gradient(135deg, rgba(112, 72, 232, 0.1), rgba(241, 106, 85, 0.1));
     }
 
     .card-name {
@@ -425,27 +478,27 @@
     }
 
     .tag-blue {
-      border-color: rgba(99, 210, 255, 0.4);
+      border-color: rgba(112, 72, 232, 0.4);
       color: var(--accent);
-      background: rgba(99, 210, 255, 0.07);
+      background: rgba(112, 72, 232, 0.07);
     }
 
     .tag-purple {
-      border-color: rgba(167, 139, 250, 0.4);
+      border-color: rgba(241, 106, 85, 0.4);
       color: var(--accent2);
-      background: rgba(167, 139, 250, 0.07);
+      background: rgba(241, 106, 85, 0.07);
     }
 
     .tag-green {
-      border-color: rgba(52, 211, 153, 0.4);
-      color: var(--accent3);
-      background: rgba(52, 211, 153, 0.07);
+      border-color: rgba(241, 106, 85, 0.35);
+      color: #536b1e;
+      background: rgba(198, 235, 93, 0.18);
     }
 
     .tag-orange {
-      border-color: rgba(251, 146, 60, 0.4);
+      border-color: rgba(69, 184, 173, 0.4);
       color: var(--accent4);
-      background: rgba(251, 146, 60, 0.07);
+      background: rgba(69, 184, 173, 0.07);
     }
 
     .card-stat-row {
@@ -529,6 +582,69 @@
       margin: 0 60px;
     }
 
+    #skills {
+      background:
+        radial-gradient(ellipse at 14% 35%, rgba(69,184,173,.09), transparent 28rem),
+        radial-gradient(ellipse at 86% 80%, rgba(198,235,93,.10), transparent 24rem);
+    }
+    #projects {
+      background:
+        radial-gradient(ellipse at 92% 12%, rgba(112,72,232,.09), transparent 32rem),
+        linear-gradient(140deg, rgba(255,255,255,.18), rgba(255,255,255,.5));
+      border-top: 1px solid rgba(112,72,232,.08);
+      border-bottom: 1px solid rgba(112,72,232,.08);
+    }
+    .divider { background: linear-gradient(90deg, transparent, rgba(112,72,232,.18), rgba(241,106,85,.14), transparent); }
+
+    .btn-primary .button-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      margin: -7px -19px -7px 4px;
+      border-radius: 50%;
+      color: var(--text);
+      background: var(--accent3);
+      transition: transform .2s ease, background-color .2s ease;
+    }
+    .btn-primary:hover .button-icon { transform: rotate(-35deg); background: #fff; }
+    .btn-outline {
+      background: rgba(255,255,255,.68);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.9);
+    }
+    .btn-outline span {
+      display: inline-grid;
+      place-items: center;
+      width: 25px;
+      height: 25px;
+      margin: -5px -18px -5px 0;
+      border-radius: 50%;
+      color: var(--accent);
+      background: var(--surface2);
+      transition: transform .2s ease, background-color .2s ease, color .2s ease;
+    }
+    .btn-outline:hover span {
+      color: #fff;
+      background: var(--accent);
+      transform: rotate(35deg);
+    }
+    .btn-outline:hover {
+      background: #fff;
+      box-shadow: 0 7px 18px rgba(55,39,91,.09);
+    }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+      z-index: 300;
+      pointer-events: none;
+    }
+
     /* ── ABOUT ── */
     .about-grid {
       display: grid;
@@ -562,7 +678,7 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .highlight-card:hover {
@@ -590,7 +706,7 @@
     /* ── SKILLS ── */
     .skills-layout {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
     }
 
@@ -599,13 +715,13 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 28px;
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .skill-group:hover {
-      border-color: rgba(99, 210, 255, 0.3);
+      border-color: rgba(112, 72, 232, 0.3);
       transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(99, 210, 255, 0.07);
+      box-shadow: 0 12px 26px rgba(27, 51, 36, .07);
     }
 
     .skill-group-title {
@@ -626,9 +742,9 @@
       color: var(--accent2);
     }
 
-    .skill-group-title.tools {
-      color: var(--accent3);
-    }
+    .skill-group-title.tools { color: #5b7024; }
+
+    .skill-group-title.database { color: var(--accent4); }
 
     .skill-item {
       display: flex;
@@ -657,8 +773,11 @@
     .skill-bar {
       height: 100%;
       border-radius: 10px;
-      animation: barFill 1.5s ease forwards;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
     }
+    .skill-group.visible .skill-bar { transform: scaleX(1); }
 
     .skill-bar.lang {
       background: var(--accent);
@@ -672,11 +791,7 @@
       background: var(--accent3);
     }
 
-    @keyframes barFill {
-      from {
-        width: 0
-      }
-    }
+    .skill-bar.database { background: var(--accent4); }
 
     .skill-level {
       font-family: 'DM Mono', monospace;
@@ -699,9 +814,116 @@
       padding: 36px;
       position: relative;
       overflow: hidden;
-      transition: all 0.4s;
+      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
+
+    .project-card:nth-child(3n + 2) { background: #fff8ef; }
+    .project-card:nth-child(3n) { background: #effaf6; }
+    .project-card:nth-child(3n + 1) { background: #f5f1ff; }
+    .project-card.featured {
+      background:
+        radial-gradient(circle at 84% 28%, rgba(198,235,93,.22), transparent 17rem),
+        linear-gradient(125deg, #271a48 0%, #5535a0 57%, #35245e 100%);
+      border-color: rgba(160, 132, 255, .42);
+      color: #fff;
+    }
+    .project-card.featured .project-desc { color: #d7cfee; }
+    .project-card.featured .project-num { color: rgba(255,255,255,.12); }
+    .project-card.featured .project-badge {
+      color: var(--accent3);
+      background: rgba(198,235,93,.17);
+      border-color: rgba(198,235,93,.38);
+    }
+    .project-card.featured .project-link-label { color: var(--accent3); }
+    .project-card.featured .stack-pill {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.16);
+      color: #eee8ff;
+    }
+    .project-card[hidden] { display: none; }
+
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(135deg, rgba(112, 72, 232, .08), transparent 58%);
+      transition: opacity .2s ease;
+    }
+    .project-card:hover::after { opacity: 1; }
+    .project-card:focus-visible { outline-offset: 5px; }
+    .project-card .project-visual {
+      box-shadow: inset 0 0 40px rgba(112, 72, 232, .06);
+    }
+    .project-card .project-visual span {
+      transition: transform .25s ease;
+    }
+    .project-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin: -32px 0 28px;
+      color: var(--muted);
+      font: .72rem 'DM Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .project-toolbar a { color: var(--accent); text-decoration: none; }
+    .project-toolbar a:hover { color: var(--text); }
+
+    .project-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 26px;
+    }
+    .project-filter {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--muted);
+      background: rgba(255,255,255,.62);
+      font: 600 .8rem 'Cabinet Grotesk', sans-serif;
+      cursor: pointer;
+      transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .project-filter:hover { transform: translateY(-2px); border-color: var(--accent); color: var(--accent); }
+    .project-filter.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 7px 16px rgba(112,72,232,.19);
+    }
+    .project-filter span {
+      display: inline-grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      font-size: .7rem;
+    }
+    .project-link-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--accent);
+      font: .72rem 'DM Mono', monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .project-link-label span { transition: transform .25s; }
+    .project-card:hover .project-link-label span { transform: translate(4px,-4px); }
 
     .project-card::before {
       content: '';
@@ -717,9 +939,9 @@
     }
 
     .project-card:hover {
-      border-color: rgba(99, 210, 255, 0.25);
+      border-color: rgba(112, 72, 232, 0.25);
       transform: translateY(-6px);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      box-shadow: none;
     }
 
     .project-card:hover::before {
@@ -734,11 +956,37 @@
       align-items: center;
     }
 
+    .project-card:not(.featured) {
+      min-height: 360px;
+      border-radius: 24px;
+      border-color: rgba(55, 39, 91, .10);
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:not(.featured) > div:first-child {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+    }
+    .project-card:not(.featured) .project-link-label {
+      margin-top: auto;
+      padding-top: 24px;
+    }
+    .project-card:not(.featured):nth-child(3n + 2) {
+      background: linear-gradient(145deg, #fff9ef 0%, #fff4e4 100%);
+    }
+    .project-card:not(.featured):nth-child(3n) {
+      background: linear-gradient(145deg, #effaf6 0%, #e5f5ef 100%);
+    }
+    .project-card:not(.featured):nth-child(3n + 1) {
+      background: linear-gradient(145deg, #f7f3ff 0%, #eee8ff 100%);
+    }
+
     .project-num {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: 4rem;
-      color: rgba(99, 210, 255, 0.06);
+      color: rgba(112, 72, 232, 0.06);
       line-height: 1;
       margin-bottom: 16px;
       letter-spacing: -0.05em;
@@ -758,27 +1006,42 @@
     }
 
     .badge-winner {
-      background: rgba(251, 146, 60, 0.1);
-      border: 1px solid rgba(251, 146, 60, 0.3);
+      background: rgba(69, 184, 173, 0.1);
+      border: 1px solid rgba(69, 184, 173, 0.3);
       color: var(--accent4);
     }
 
     .badge-gsoc {
-      background: rgba(52, 211, 153, 0.1);
-      border: 1px solid rgba(52, 211, 153, 0.3);
-      color: var(--accent3);
+      background: rgba(198, 235, 93, 0.2);
+      border: 1px solid rgba(241, 106, 85, 0.3);
+      color: var(--accent2);
     }
 
     .badge-featured {
-      background: rgba(99, 210, 255, 0.1);
-      border: 1px solid rgba(99, 210, 255, 0.3);
+      background: rgba(112, 72, 232, 0.1);
+      border: 1px solid rgba(112, 72, 232, 0.3);
       color: var(--accent);
     }
 
     .badge-hackathon {
-      background: rgba(167, 139, 250, 0.1);
-      border: 1px solid rgba(167, 139, 250, 0.3);
+      background: rgba(241, 106, 85, 0.1);
+      border: 1px solid rgba(241, 106, 85, 0.3);
       color: var(--accent2);
+    }
+    .project-card[data-category="Products"] .project-badge {
+      color: #216d68;
+      background: rgba(69,184,173,.12);
+      border-color: rgba(69,184,173,.3);
+    }
+    .project-card[data-category="Security"] .project-badge {
+      color: #b34837;
+      background: rgba(241,106,85,.12);
+      border-color: rgba(241,106,85,.3);
+    }
+    .project-card[data-category="Experiments"] .project-badge {
+      color: #536b1e;
+      background: rgba(198,235,93,.24);
+      border-color: rgba(83,107,30,.28);
     }
 
     .project-name {
@@ -817,18 +1080,26 @@
       position: absolute;
       top: 28px;
       right: 28px;
-      font-size: 1.2rem;
-      color: var(--muted);
-      transition: all 0.3s;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(55,39,91,.10);
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      font-size: 1.15rem;
+      color: var(--accent);
+      transition: transform .2s ease, background-color .2s ease, color .2s ease;
     }
 
     .project-card:hover .project-arrow {
-      color: var(--accent);
-      transform: translate(4px, -4px);
+      color: #fff;
+      background: var(--accent);
+      transform: translate(3px, -3px) rotate(4deg);
     }
 
     .project-visual {
-      background: var(--surface2);
+      background: linear-gradient(145deg, rgba(198,235,93,.18), rgba(241,106,85,.17) 52%, rgba(112,72,232,.25));
       border-radius: 12px;
       border: 1px solid var(--border);
       height: 200px;
@@ -844,7 +1115,20 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(99, 210, 255, 0.05) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(112, 72, 232, 0.05) 0%, transparent 70%);
+    }
+    .project-visual::before {
+      content: "";
+      position: absolute;
+      width: 68%;
+      height: 58%;
+      border: 1px dashed rgba(255,255,255,.56);
+      border-radius: 50%;
+      transform: rotateX(62deg) rotateZ(-24deg);
+      animation: orbitTrace 16s linear infinite;
+    }
+    @keyframes orbitTrace {
+      to { transform: rotateX(62deg) rotateZ(336deg); }
     }
 
     /* ── ACHIEVEMENTS ── */
@@ -862,11 +1146,11 @@
       grid-template-columns: 64px 1fr auto;
       gap: 24px;
       align-items: center;
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .achievement-item:hover {
-      border-color: rgba(99, 210, 255, 0.25);
+      border-color: rgba(112, 72, 232, 0.25);
       transform: translateX(6px);
     }
 
@@ -940,7 +1224,7 @@
       border: 1px solid var(--border);
       text-decoration: none;
       color: var(--text);
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .contact-link:hover {
@@ -1006,13 +1290,13 @@
       font-family: 'Cabinet Grotesk', sans-serif;
       font-size: 0.95rem;
       outline: none;
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .form-input:focus,
     .form-textarea:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(99, 210, 255, 0.08);
+      box-shadow: 0 0 0 3px rgba(112, 72, 232, 0.08);
     }
 
     .form-textarea {
@@ -1022,21 +1306,21 @@
 
     .form-btn {
       background: var(--accent);
-      color: var(--bg);
+      color: #fffdf8;
       border: none;
       padding: 16px 32px;
-      border-radius: 8px;
+      border-radius: 999px;
       font-weight: 700;
       font-size: 0.95rem;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
       font-family: 'Cabinet Grotesk', sans-serif;
     }
 
     .form-btn:hover {
-      background: white;
+      background: var(--accent2);
       transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(99, 210, 255, 0.25);
+      box-shadow: 0 10px 22px rgba(47, 33, 83, .16);
     }
 
     /* ── FOOTER ── */
@@ -1083,7 +1367,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1);
     }
 
     .reveal.visible {
@@ -1095,7 +1379,7 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
+      filter: none;
       pointer-events: none;
       z-index: 0;
     }
@@ -1103,7 +1387,7 @@
     .orb-1 {
       width: 500px;
       height: 500px;
-      background: rgba(99, 210, 255, 0.04);
+      background: radial-gradient(circle, rgba(112, 72, 232, .09), transparent 70%);
       top: -200px;
       right: -100px;
     }
@@ -1111,7 +1395,7 @@
     .orb-2 {
       width: 400px;
       height: 400px;
-      background: rgba(167, 139, 250, 0.04);
+      background: radial-gradient(circle, rgba(241, 106, 85, .08), transparent 70%);
       bottom: -100px;
       left: -100px;
     }
@@ -1130,6 +1414,8 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
+      .scene-canvas { opacity: .3; }
 
       section {
         padding: 80px 30px;
@@ -1184,6 +1470,12 @@
       .hero {
         padding: 100px 20px 60px;
       }
+
+      .hero::after { height: 16%; }
+      .project-toolbar { align-items: flex-start; flex-direction: column; margin-top: -32px; }
+      .project-card:not(.featured) { min-height: 0; }
+      .project-filters { gap: 8px; }
+      .project-filter { padding: 9px 12px; }
 
       section {
         padding: 60px 20px;
@@ -1251,7 +1543,7 @@
       height: 2px;
       background: var(--text);
       border-radius: 2px;
-      transition: all 0.3s;
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, color .22s ease;
     }
 
     .hamburger.active span:nth-child(1) {
@@ -1273,8 +1565,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(6, 8, 16, 0.95);
-      backdrop-filter: blur(24px);
+      background: rgba(247, 244, 255, .98);
+      backdrop-filter: blur(12px);
       z-index: 99;
       flex-direction: column;
       align-items: center;
@@ -1299,6 +1591,7 @@
     .mobile-menu a:hover {
       color: var(--accent);
     }
+    .mobile-menu a.btn-primary { color: #fff; }
 
     /* ── FOCUS STYLES ── */
     *:focus-visible {
@@ -1317,11 +1610,122 @@
         border-color: var(--accent)
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .scene-canvas { display: none; }
+      .hero-card { animation: none; }
+      .project-visual::before { animation: none; }
+    }
+
+    /* Black-on-black portfolio theme with electric lime and ember details. */
+    body {
+      background:
+        radial-gradient(ellipse at 78% 7%, rgba(199,255,84,.055), transparent 34rem),
+        radial-gradient(ellipse at 8% 48%, rgba(255,121,92,.035), transparent 38rem),
+        #08090a;
+      color: #f4f5f0;
+    }
+    body::after {
+      background-image: linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
+    }
+    nav {
+      background: rgba(15,17,18,.88);
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 12px 38px rgba(0,0,0,.42);
+    }
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 560px 480px at 78% 45%, rgba(199,255,84,.07), transparent 72%),
+        radial-gradient(ellipse 440px 360px at 8% 82%, rgba(255,121,92,.045), transparent 72%);
+    }
+    .hero-card, .skill-group, .contact-form, .project-card,
+    .achievement-item, .contact-link, .about-highlight {
+      background-color: #111315;
+      border-color: rgba(255,255,255,.11);
+      color: var(--text);
+    }
+    .hero-card { box-shadow: 0 24px 70px rgba(0,0,0,.38); }
+    .hero-card:hover { box-shadow: 0 28px 76px rgba(0,0,0,.48); }
+    .profile-img-wrap { background: #1a1d1f; }
+    .profile-avatar { background: linear-gradient(135deg, rgba(199,255,84,.09), rgba(255,121,92,.08)); }
+    section, #skills, #projects, #about, #achievements, #contact {
+      background-color: #08090a;
+    }
+    #skills {
+      background-image: radial-gradient(ellipse at 82% 45%, rgba(101,223,203,.045), transparent 30rem);
+    }
+    #projects {
+      background-image: radial-gradient(ellipse at 90% 10%, rgba(199,255,84,.045), transparent 32rem);
+      border-color: rgba(255,255,255,.08);
+    }
+    .divider { background: linear-gradient(90deg, transparent, rgba(199,255,84,.25), rgba(255,121,92,.16), transparent); }
+    .btn-primary, .nav-cta {
+      background: var(--accent);
+      color: #10120c;
+      box-shadow: 0 8px 24px rgba(199,255,84,.12);
+    }
+    .btn-primary:hover, .nav-cta:hover {
+      background: #f4f5f0;
+      color: #08090a;
+      box-shadow: 0 10px 28px rgba(255,255,255,.1);
+    }
+    .btn-outline, .project-filter { background: #111315; color: var(--text); }
+    .btn-outline { box-shadow: inset 0 0 0 1px rgba(255,255,255,.06); }
+    .btn-outline:hover, .project-filter:hover { background: #1a1d1f; color: var(--accent); }
+    .btn-outline span { background: #222722; color: var(--accent); }
+    .btn-outline:hover span { background: var(--accent); color: #10120c; }
+    .project-filter.active { background: var(--accent); color: #10120c; border-color: var(--accent); box-shadow: 0 7px 20px rgba(199,255,84,.14); }
+    .project-card:not(.featured),
+    .project-card:not(.featured):nth-child(3n + 1),
+    .project-card:not(.featured):nth-child(3n + 2),
+    .project-card:not(.featured):nth-child(3n) { background: #111315; }
+    .project-card.featured {
+      background:
+        radial-gradient(circle at 86% 25%, rgba(199,255,84,.09), transparent 17rem),
+        linear-gradient(135deg, #171a18, #0d0f10 74%);
+      border-color: rgba(199,255,84,.28);
+    }
+    .project-card.featured .project-desc { color: #c3c8c0; }
+    .project-card.featured .stack-pill { color: #e8ebe5; }
+    .project-card::after { background: linear-gradient(135deg, rgba(199,255,84,.055), transparent 58%); }
+    .project-card:hover { border-color: rgba(199,255,84,.36); }
+    .project-num { color: rgba(199,255,84,.12); }
+    .project-badge, .project-card[data-category="Products"] .project-badge,
+    .project-card[data-category="Security"] .project-badge,
+    .project-card[data-category="Experiments"] .project-badge {
+      color: var(--accent);
+      background: rgba(199,255,84,.08);
+      border-color: rgba(199,255,84,.22);
+    }
+    .badge-hackathon, .project-card[data-category="Security"] .project-badge { color: #ff9a82; background: rgba(255,121,92,.08); border-color: rgba(255,121,92,.2); }
+    .skill-item { border-color: rgba(255,255,255,.09); }
+    .tag, .tag-blue, .tag-purple, .tag-green, .tag-orange {
+      color: var(--accent);
+      background: rgba(199,255,84,.07);
+      border-color: rgba(199,255,84,.22);
+    }
+    .tag-purple { color: #ff9a82; background: rgba(255,121,92,.07); border-color: rgba(255,121,92,.2); }
+    .skill-bar-wrap { background: #282c2d; }
+    .project-visual { background: linear-gradient(145deg, #191d1b, #101213); border-color: rgba(199,255,84,.16); }
+    .project-visual::after { background: radial-gradient(circle at 50% 50%, rgba(199,255,84,.08), transparent 70%); }
+    .mobile-menu { background: rgba(8,9,10,.98); }
+    .contact-link:hover, .achievement-item:hover { background: #171a18; border-color: rgba(199,255,84,.3); }
+    .footer { background: #08090a; border-color: rgba(255,255,255,.1); }
+    .orb-1 { background: radial-gradient(circle, rgba(199,255,84,.045), transparent 70%); }
+    .orb-2 { background: radial-gradient(circle, rgba(255,121,92,.035), transparent 70%); }
   </style>
 </head>
 
 <body>
 
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
@@ -1335,7 +1739,7 @@
       <a href="#achievements">Achievements</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Hire Me →</a>
+    <a href="#contact" class="nav-cta">Let’s talk <span aria-hidden="true">↗</span></a>
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
       <span></span>
       <span></span>
@@ -1355,23 +1759,23 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
+    <canvas class="scene-canvas" id="orbitCanvas" aria-hidden="true"></canvas>
     <div class="orb orb-1"></div>
     <div class="hero-grid container">
       <div class="hero-content">
-        <div class="hero-eyebrow"><span class="status-dot"></span>Open to Opportunities · B.Tech CS-AI · First Year
+        <div class="hero-eyebrow"><span class="status-dot"></span>Open to Opportunities · B.Tech CS-AI · Second Year
         </div>
         <h1 class="hero-name">
           <div class="first">Ayush</div>
           <div class="last">Bhatnagar</div>
         </h1>
-        <div class="hero-title">Frontend Developer <span>&amp;</span> AI Enthusiast</div>
+        <div class="hero-title"><span id="roleCycle">Frontend Developer</span> <span>&amp;</span> AI Enthusiast</div>
         <p class="hero-desc">
-          Building ultra-modern digital experiences — from AI-powered voice interfaces to enterprise asset protection
-          systems. Passionate about clean code, stunning UI, and open-source contributions.
+          I turn ambitious ideas into expressive, useful software — from AI-powered workspaces to real-time products and human-centered tools.
         </p>
         <div class="hero-ctas">
-          <a href="#projects" class="btn-primary">View Projects ↓</a>
-          <a href="#contact" class="btn-outline">Get in Touch</a>
+          <a href="#projects" class="btn-primary">View projects <span class="button-icon" aria-hidden="true">↓</span></a>
+          <a href="#contact" class="btn-outline">Let’s connect <span aria-hidden="true">↗</span></a>
         </div>
       </div>
       <div class="hero-card reveal">
@@ -1382,7 +1786,7 @@
         </div>
         <div class="card-name">Ayush Bhatnagar</div>
         <div class="card-college">G.L Bajaj Institute of Technology &amp; Management</div>
-        <div class="card-branch">B.Tech · CS-AI · First Year · 2025–2029</div>
+        <div class="card-branch">B.Tech · CS-AI · Second Year · Class of 2029</div>
         <div class="card-tags">
           <span class="tag tag-blue">Web Dev</span>
           <span class="tag tag-purple">DSA</span>
@@ -1391,15 +1795,15 @@
         </div>
         <div class="card-stat-row">
           <div class="card-stat">
-            <div class="card-stat-num">4</div>
-            <div class="card-stat-label">Projects</div>
+            <div class="card-stat-num">20+</div>
+            <div class="card-stat-label">Repositories</div>
           </div>
           <div class="card-stat">
             <div class="card-stat-num">2</div>
             <div class="card-stat-label">Teams Led</div>
           </div>
           <div class="card-stat">
-            <div class="card-stat-num">1st</div>
+            <div class="card-stat-num">2nd</div>
             <div class="card-stat-label">Year</div>
           </div>
         </div>
@@ -1416,9 +1820,9 @@
       <h2 class="section-title">Who I <em>Am</em></h2>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>I'm <strong>Ayush Bhatnagar</strong>, a first-year B.Tech CS-AI student at <strong>G.L Bajaj Institute of
-              Technology and Management</strong>. Despite being in my first year, I've already built real-world projects
-            spanning AI voice assistants, digital rights management systems, and enterprise bias detection platforms.
+          <p>I'm <strong>Ayush Bhatnagar</strong>, a B.Tech CS-AI student at <strong>G.L Bajaj Institute of
+              Technology and Management</strong>. I build practical projects across AI-assisted collaboration,
+            real-time communication, and human-centered product design.
           </p>
           <p>I thrive at the intersection of <strong>design and engineering</strong> — crafting interfaces that are both
             technically sound and visually stunning. I believe great software is as much about how it feels as how it
@@ -1431,7 +1835,7 @@
             <div class="highlight-icon">🎓</div>
             <div class="highlight-text">
               <strong>G.L Bajaj ITM</strong>
-              <span>B.Tech Computer Science — Artificial Intelligence · First Year</span>
+              <span>B.Tech Computer Science — Artificial Intelligence · Second Year · Class of 2029</span>
             </div>
           </div>
           <div class="highlight-card">
@@ -1493,6 +1897,11 @@
           </div>
 
           <div class="skill-item">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar-wrap"><div class="skill-bar lang" style="width:78%"></div></div>
+            <span class="skill-level">Proficient</span>
+          </div>
+          <div class="skill-item">
             <span class="skill-name">DSA (C++)</span>
             <div class="skill-bar-wrap">
               <div class="skill-bar lang" style="width:60%"></div>
@@ -1529,6 +1938,24 @@
               <div class="skill-bar web" style="width:80%"></div>
             </div>
             <span class="skill-level">Strong</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <div class="skill-group-title database">// Databases</div>
+          <div class="skill-item">
+            <span class="skill-name">MySQL</span>
+            <div class="skill-bar-wrap"><div class="skill-bar database" style="width:76%"></div></div>
+            <span class="skill-level">Proficient</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">PostgreSQL</span>
+            <div class="skill-bar-wrap"><div class="skill-bar database" style="width:72%"></div></div>
+            <span class="skill-level">Proficient</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">SQLite</span>
+            <div class="skill-bar-wrap"><div class="skill-bar database" style="width:70%"></div></div>
+            <span class="skill-level">Proficient</span>
           </div>
         </div>
         <div class="skill-group reveal">
@@ -1571,97 +1998,149 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
-      <div class="section-label">03 — Projects</div>
-      <h2 class="section-title">Things I've <em>Built</em></h2>
+      <div class="section-label">03 — Selected work</div>
+      <h2 class="section-title">Ideas into <em>interfaces</em></h2>
+      <div class="project-toolbar">
+        <span>Ten builds across AI, security, connected products &amp; design</span>
+        <a href="https://github.com/ayush-devcore?tab=repositories" target="_blank" rel="noopener noreferrer">Explore all repositories ↗</a>
+      </div>
+      <div class="project-filters" role="group" aria-label="Filter projects">
+        <button class="project-filter active" type="button" data-filter="All" aria-pressed="true">All work <span>10</span></button>
+        <button class="project-filter" type="button" data-filter="AI" aria-pressed="false">AI &amp; data</button>
+        <button class="project-filter" type="button" data-filter="Security" aria-pressed="false">Security</button>
+        <button class="project-filter" type="button" data-filter="Products" aria-pressed="false">Products</button>
+        <button class="project-filter" type="button" data-filter="Experiments" aria-pressed="false">Experiments</button>
+      </div>
       <div class="projects-grid">
-
-        <!-- BiasLens — Featured -->
-        <div class="project-card featured reveal">
+        <a class="project-card featured reveal" data-category="AI" href="https://github.com/ayush-devcore/VortexAI" target="_blank" rel="noopener noreferrer" aria-label="Explore Vortex Workspace on GitHub">
           <div>
             <div class="project-num">01</div>
-            <span class="project-badge badge-hackathon">🏆 Google Prompt Wars 2026</span>
-            <div class="project-name">BiasLens — Enterprise AI Fairness Auditor</div>
-            <div class="project-desc">
-              A production-ready AI fairness auditor that detects, analyzes, and mitigates bias in datasets and ML
-              models using 9+ fairness metrics. Built with FastAPI, scikit-learn, AIF360, and NVIDIA NIM API. Leading
-              this project as Team Lead for the Google Prompt Wars Hackathon 2026.
-            </div>
-            <div class="project-stack">
-              <span class="stack-pill">Python</span>
-              <span class="stack-pill">FastAPI</span>
-              <span class="stack-pill">NVIDIA NIM</span>
-              <span class="stack-pill">AIF360</span>
-              <span class="stack-pill">scikit-learn</span>
-              <span class="stack-pill">HTML/CSS/JS</span>
-              <span class="stack-pill">Chart.js</span>
-            </div>
+            <span class="project-badge badge-featured">AI · collaborative workspace</span>
+            <div class="project-name">Vortex Workspace</div>
+            <div class="project-desc">An AI-powered collaborative command center with real-time workspace flows and Gemini-assisted tools. A full-stack product spanning team coordination, task work, and an intelligent studio.</div>
+            <div class="project-stack"><span class="stack-pill">React 19</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Node.js</span><span class="stack-pill">Tailwind CSS</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">Gemini API</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
           </div>
-          <div class="project-visual">⚖️</div>
+          <div class="project-visual"><span>◈</span></div>
           <div class="project-arrow">↗</div>
-        </div>
+        </a>
 
-        <!-- VoiceVerse -->
-        <div class="project-card reveal">
-          <div class="project-num">02</div>
-          <span class="project-badge badge-featured">🎙️ AI Project</span>
-          <div class="project-name">VoiceVerse — AI Vocal Analyzer</div>
-          <div class="project-desc">
-            Record your voice, find your vocal range, and discover which Bollywood/Indie singer you sound like. Features
-            real-time waveform visualization, MFCC feature extraction, and cosine similarity matching.
+        <a class="project-card reveal" data-category="Products" href="https://github.com/ayush-devcore/Whispr" target="_blank" rel="noopener noreferrer" aria-label="Explore Whispr on GitHub">
+          <div>
+            <div class="project-num">02</div>
+            <span class="project-badge badge-featured">Communication · real-time</span>
+            <div class="project-name">Whispr</div>
+            <div class="project-desc">A real-time messaging app with direct conversations, online presence, typing signals, file sharing, voice/video call signaling, and a data-backed admin view.</div>
+            <div class="project-stack"><span class="stack-pill">Node.js</span><span class="stack-pill">Socket.IO</span><span class="stack-pill">PostgreSQL</span><span class="stack-pill">Web Push</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
           </div>
-          <div class="project-stack">
-            <span class="stack-pill">Python</span>
-            <span class="stack-pill">Flask</span>
-            <span class="stack-pill">Librosa</span>
-            <span class="stack-pill">Web Audio API</span>
-            <span class="stack-pill">scikit-learn</span>
-            <span class="stack-pill">MFCC</span>
-          </div>
+
           <div class="project-arrow">↗</div>
-        </div>
+        </a>
 
-        <!-- AEGIS -->
-        <div class="project-card reveal">
-          <div class="project-num">03</div>
-          <span class="project-badge badge-featured">🛡️ Enterprise App</span>
-          <div class="project-name">AEGIS — Digital Asset Protection System</div>
-          <div class="project-desc">
-            Real-time surveillance of sports media across the global internet. Features cryptographic fingerprinting,
-            steganographic watermarking, DMCA generator, and a stunning cyberpunk UI. Zero dependencies — pure
-            HTML/CSS/JS.
+        <a class="project-card reveal" data-category="Products" href="https://github.com/ayush-devcore/haven-home-security-pwa" target="_blank" rel="noopener noreferrer" aria-label="Explore Haven on GitHub">
+          <div>
+            <div class="project-num">03</div>
+            <span class="project-badge badge-featured">IoT · home security</span>
+            <div class="project-name">Haven</div>
+            <div class="project-desc">An installable home-security PWA with a React dashboard. ESP32 integration is planned, making this a clear bridge between interface design and connected devices.</div>
+            <div class="project-stack"><span class="stack-pill">React</span><span class="stack-pill">TypeScript</span><span class="stack-pill">Vite</span><span class="stack-pill">PWA</span><span class="stack-pill">ESP32 planned</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
           </div>
-          <div class="project-stack">
-            <span class="stack-pill">HTML5</span>
-            <span class="stack-pill">CSS3</span>
-            <span class="stack-pill">Vanilla JS</span>
-            <span class="stack-pill">Canvas API</span>
-            <span class="stack-pill">Web Crypto</span>
-            <span class="stack-pill">LSB Steganography</span>
-          </div>
+
           <div class="project-arrow">↗</div>
-        </div>
+        </a>
 
-        <!-- SENTIENT CORE -->
-        <div class="project-card reveal">
-          <div class="project-num">04</div>
-          <span class="project-badge badge-featured">🤖 AI Voice</span>
-          <div class="project-name">SENTIENT CORE — Neural AI Interface</div>
-          <div class="project-desc">
-            A premium browser-based AI voice assistant powered by Google Gemini 1.5 Flash. Features live audio
-            visualizer, gooey blob mesh, speech-to-text input, and text-to-speech output with a cyberpunk
-            neural-interface UI.
+        <a class="project-card reveal" data-category="AI" href="https://github.com/ayush-devcore/ScamShield-AI" target="_blank" rel="noopener noreferrer" aria-label="Explore ScamShield AI on GitHub">
+          <div>
+            <div class="project-num">04</div>
+            <span class="project-badge badge-featured">AI · security</span>
+            <div class="project-name">ScamShield AI</div>
+            <div class="project-desc">An AI security project exploring ways to help people recognize scam attempts. Visit the repository to see its current scope and implementation.</div>
+            <div class="project-stack"><span class="stack-pill">AI</span><span class="stack-pill">Security</span><span class="stack-pill">ScamShield</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
           </div>
-          <div class="project-stack">
-            <span class="stack-pill">Gemini 1.5 Flash</span>
-            <span class="stack-pill">Vite</span>
-            <span class="stack-pill">Web Speech API</span>
-            <span class="stack-pill">Canvas</span>
-            <span class="stack-pill">Web Audio API</span>
-            <span class="stack-pill">ES Modules</span>
-          </div>
+
           <div class="project-arrow">↗</div>
-        </div>
+        </a>
 
+        <a class="project-card reveal" data-category="Products" href="https://github.com/ayush-devcore/YatraSetu" target="_blank" rel="noopener noreferrer" aria-label="Explore YatraSetu on GitHub">
+          <div>
+            <div class="project-num">05</div>
+            <span class="project-badge badge-featured">Product · travel technology</span>
+            <div class="project-name">YatraSetu</div>
+            <div class="project-desc">A Smart India Hackathon concept for connected, multimodal journeys. It brings rail, city transit, and last-mile planning into one route flow, with clear comparisons and fare ranges.</div>
+            <div class="project-stack"><span class="stack-pill">JavaScript</span><span class="stack-pill">Mobility UX</span><span class="stack-pill">Route planning</span><span class="stack-pill">SIH 2026</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a class="project-card reveal" data-category="Experiments" href="https://github.com/ayush-devcore/CodeOrbit_Caesar-Cipher-Tool" target="_blank" rel="noopener noreferrer" aria-label="Explore Caesar Cipher Toolkit on GitHub">
+          <div>
+            <div class="project-num">06</div>
+            <span class="project-badge badge-featured">Security · cryptography</span>
+            <div class="project-name">Caesar Cipher Toolkit</div>
+            <div class="project-desc">A modular cryptanalysis tool with encryption and decryption, a brute-force cracker, and automated frequency analysis. Built to make classic cipher exploration hands-on.</div>
+            <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Cryptography</span><span class="stack-pill">Frequency analysis</span><span class="stack-pill">Brute force</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a class="project-card reveal" data-category="Security" href="https://github.com/ayush-devcore/CodeOrbit_PasswordChecker" target="_blank" rel="noopener noreferrer" aria-label="Explore Password Checker on GitHub">
+          <div>
+            <div class="project-num">07</div>
+            <span class="project-badge badge-featured">Security · privacy</span>
+            <div class="project-name">Password Checker</div>
+            <div class="project-desc">A security-first password evaluator using NIST SP 800-63B guidance, real-time entropy estimation, and pattern detection to give useful feedback as you type.</div>
+            <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">NIST guidance</span><span class="stack-pill">Entropy</span><span class="stack-pill">Pattern detection</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a class="project-card reveal" data-category="AI" href="https://github.com/ayush-devcore/BiasLens" target="_blank" rel="noopener noreferrer" aria-label="Explore BiasLens on GitHub">
+          <div>
+            <div class="project-num">08</div>
+            <span class="project-badge badge-featured">AI · responsible data</span>
+            <div class="project-name">BiasLens</div>
+            <div class="project-desc">A toolkit for bringing transparency to data by identifying socio-economic and gender bias in large datasets, with analytics designed to make fairness signals easier to inspect.</div>
+            <div class="project-stack"><span class="stack-pill">Python</span><span class="stack-pill">Fairness analytics</span><span class="stack-pill">Data science</span><span class="stack-pill">AI ethics</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a class="project-card reveal" data-category="Products" href="https://github.com/ayush-devcore/Portfolio" target="_blank" rel="noopener noreferrer" aria-label="Explore Portfolio / this site on GitHub">
+          <div>
+            <div class="project-num">09</div>
+            <span class="project-badge badge-featured">Design · interactive web</span>
+            <div class="project-name">Portfolio / this site</div>
+            <div class="project-desc">A living portfolio built as an interactive space: animated depth, an evolving project gallery, playful interactions, and a sharper visual system.</div>
+            <div class="project-stack"><span class="stack-pill">HTML</span><span class="stack-pill">CSS</span><span class="stack-pill">Canvas</span><span class="stack-pill">Interaction design</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a class="project-card reveal" data-category="Security" href="https://github.com/ayush-devcore/VaultChat" target="_blank" rel="noopener noreferrer" aria-label="Explore VaultChat on GitHub">
+          <div>
+            <div class="project-num">10</div>
+            <span class="project-badge badge-featured">Security · end-to-end encrypted</span>
+            <div class="project-name">VaultChat</div>
+            <div class="project-desc">A real-time messaging PWA built around a zero-trust model. Client-side ECDH key exchange and AES-256-GCM keep message contents encrypted before they reach the server.</div>
+            <div class="project-stack"><span class="stack-pill">React</span><span class="stack-pill">FastAPI</span><span class="stack-pill">Web Crypto</span><span class="stack-pill">PostgreSQL</span></div>
+            <span class="project-link-label">View repository <span>↗</span></span>
+          </div>
+
+          <div class="project-arrow">↗</div>
+        </a>
       </div>
     </div>
   </section>
@@ -1712,10 +2191,9 @@
         <div class="achievement-item reveal">
           <div class="achievement-icon">💻</div>
           <div>
-            <div class="achievement-title">4 Full-Stack Projects as a First Year Student</div>
-            <div class="achievement-desc">Built four production-grade projects (VoiceVerse, AEGIS, SENTIENT CORE,
-              BiasLens) spanning AI/ML, audio DSP, cybersecurity, and fairness auditing — all before completing first
-              year of B.Tech.</div>
+          <div class="achievement-title">Building across full-stack, AI &amp; product design</div>
+          <div class="achievement-desc">Exploring different product challenges through Vortex Workspace, Whispr,
+              YatraSetu, and BiasLens — from real-time collaboration to AI-assisted workflows and multimodal travel.</div>
           </div>
           <div class="achievement-year">2025–2026</div>
         </div>
@@ -1813,16 +2291,164 @@
   </footer>
 
   <script>
+    // Small orbital scene: constant-time drawing keeps the hero smooth on modest devices.
+    const scene = document.getElementById('orbitCanvas');
+    const sceneContext = scene?.getContext('2d', { alpha: true });
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (sceneContext && !reduceMotion) {
+      let width = 0, height = 0, frame = 0, pointerX = 0, pointerY = 0;
+      const particles = Array.from({ length: 42 }, (_, i) => ({
+        angle: (i / 42) * Math.PI * 2,
+        radius: 90 + (i % 7) * 24,
+        depth: .55 + (i % 5) * .12,
+        size: 1 + (i % 3) * .45
+      }));
+      const resizeScene = () => {
+        const rect = scene.getBoundingClientRect();
+        const dpr = Math.min(devicePixelRatio || 1, 1.25);
+        width = rect.width; height = rect.height;
+        scene.width = Math.round(width * dpr); scene.height = Math.round(height * dpr);
+        sceneContext.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      resizeScene();
+      addEventListener('resize', resizeScene, { passive: true });
+      addEventListener('pointermove', event => {
+        pointerX = (event.clientX / innerWidth - .5) * 16;
+        pointerY = (event.clientY / innerHeight - .5) * 12;
+      }, { passive: true });
+      let sceneVisible = true;
+      const drawScene = () => {
+        if (document.hidden || !sceneVisible) { frame = 0; return; }
+        sceneContext.clearRect(0, 0, width, height);
+        const t = performance.now() * .00016;
+        const cx = width * .72 + pointerX, cy = height * .5 + pointerY;
+        const points = particles.map(p => {
+          const a = p.angle + t * p.depth;
+          return { x: cx + Math.cos(a) * p.radius, y: cy + Math.sin(a) * p.radius * .43, size: p.size };
+        });
+        // Draw only short orbital segments; no blur filters or all-pairs searches.
+        sceneContext.lineWidth = 1;
+        sceneContext.strokeStyle = 'rgba(255, 121, 92, .16)';
+        sceneContext.beginPath();
+        points.forEach((p, i) => {
+          if (i % 2 === 0) {
+            const next = points[(i + 1) % points.length];
+            sceneContext.moveTo(p.x, p.y); sceneContext.lineTo(next.x, next.y);
+          }
+        });
+        sceneContext.stroke();
+        sceneContext.fillStyle = 'rgba(199, 255, 84, .72)';
+        points.forEach(p => {
+          sceneContext.beginPath(); sceneContext.arc(p.x, p.y, p.size, 0, Math.PI * 2); sceneContext.fill();
+        });
+        frame = requestAnimationFrame(drawScene);
+      };
+      const sceneObserver = new IntersectionObserver(([entry]) => {
+        sceneVisible = entry.isIntersecting;
+        if (sceneVisible && !document.hidden && !frame) frame = requestAnimationFrame(drawScene);
+        else if (!sceneVisible) { cancelAnimationFrame(frame); frame = 0; }
+      });
+      sceneObserver.observe(document.querySelector('.hero'));
+      document.addEventListener('visibilitychange', () => {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        if (!document.hidden && sceneVisible) frame = requestAnimationFrame(drawScene);
+      });
+      frame = requestAnimationFrame(drawScene);
+    }
+
+    // A restrained, frame-synced tilt gives depth without forcing layout on every pointer event.
+    if (matchMedia('(pointer: fine)').matches && !reduceMotion) {
+      document.querySelectorAll('.project-card, .hero-card').forEach(card => {
+        let pending = false, latestEvent;
+        card.addEventListener('pointermove', event => {
+          latestEvent = event;
+          if (pending) return;
+          pending = true;
+          requestAnimationFrame(() => {
+            pending = false;
+            const rect = card.getBoundingClientRect();
+            const x = latestEvent.clientX - rect.left, y = latestEvent.clientY - rect.top;
+            card.style.setProperty('--spot-x', x + 'px');
+            card.style.setProperty('--spot-y', y + 'px');
+            const tiltX = ((y / rect.height) - .5) * -2.4;
+            const tiltY = ((x / rect.width) - .5) * 3.2;
+            card.style.transform = 'perspective(1000px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg) translateY(-3px)';
+          });
+        }, { passive: true });
+        card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+      });
+    }
+
+    const projectFilters = document.querySelectorAll('.project-filter');
+    const projectCards = document.querySelectorAll('.project-card[data-category]');
+    projectFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const category = filter.dataset.filter;
+        projectFilters.forEach(button => {
+          const selected = button === filter;
+          button.classList.toggle('active', selected);
+          button.setAttribute('aria-pressed', String(selected));
+        });
+        projectCards.forEach(card => {
+          card.hidden = category !== 'All' && card.dataset.category !== category;
+        });
+      });
+    });
+
+    const progressBar = document.getElementById('scrollProgress');
+    let scrollFrame = 0;
+    const updateProgress = () => {
+      if (scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        const scrollable = document.documentElement.scrollHeight - innerHeight;
+        progressBar.style.transform = 'scaleX(' + (scrollable > 0 ? scrollY / scrollable : 0) + ')';
+        if (scene) scene.style.transform = 'translate3d(0,' + Math.min(scrollY * .035, 26) + 'px,0)';
+      });
+    };
+    addEventListener('scroll', updateProgress, { passive: true });
+    addEventListener('resize', updateProgress, { passive: true });
+    updateProgress();
+
+    const roleCycle = document.getElementById('roleCycle');
+    if (roleCycle && !reduceMotion) {
+      const roles = ['Frontend Developer', 'AI Product Builder', 'Creative Engineer'];
+      let roleIndex = 0;
+      setInterval(() => {
+        roleCycle.style.opacity = '0';
+        roleCycle.style.transform = 'translateY(5px)';
+        setTimeout(() => {
+          roleIndex = (roleIndex + 1) % roles.length;
+          roleCycle.textContent = roles[roleIndex];
+          roleCycle.style.transform = 'translateY(-5px)';
+          requestAnimationFrame(() => {
+            roleCycle.style.opacity = '1';
+            roleCycle.style.transform = 'translateY(0)';
+          });
+        }, 220);
+      }, 3200);
+    }
+
     // Custom cursor (only on devices with a fine pointer)
     if (matchMedia('(pointer: fine)').matches) {
       const cursor = document.getElementById('cursor');
       const cursorRing = document.getElementById('cursorRing');
-      let mx = 0, my = 0, rx = 0, ry = 0;
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
-      (function ringLoop() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; requestAnimationFrame(ringLoop); })();
+      let mx = 0, my = 0, rx = 0, ry = 0, cursorFrame = 0;
+      const moveCursor = event => {
+        mx = event.clientX; my = event.clientY;
+        cursor.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0) translate(-50%,-50%)';
+        if (!cursorFrame) cursorFrame = requestAnimationFrame(function settleRing() {
+          rx += (mx - rx) * .24; ry += (my - ry) * .24;
+          cursorRing.style.transform = 'translate3d(' + rx + 'px,' + ry + 'px,0) translate(-50%,-50%)';
+          if (Math.abs(mx - rx) + Math.abs(my - ry) > .5) cursorFrame = requestAnimationFrame(settleRing);
+          else cursorFrame = 0;
+        });
+      };
+      document.addEventListener('pointermove', moveCursor, { passive: true });
       document.querySelectorAll('a,button,.project-card,.highlight-card,.achievement-item').forEach(el => {
-        el.addEventListener('mouseenter', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1.5)'; cursorRing.style.borderColor = 'rgba(99,210,255,0.8)'; });
-        el.addEventListener('mouseleave', () => { cursorRing.style.transform = 'translate(-50%,-50%) scale(1)'; cursorRing.style.borderColor = 'var(--accent)'; });
+        el.addEventListener('mouseenter', () => { cursorRing.style.width = '52px'; cursorRing.style.height = '52px'; cursorRing.style.borderColor = 'rgba(199,255,84,0.8)'; });
+        el.addEventListener('mouseleave', () => { cursorRing.style.width = '38px'; cursorRing.style.height = '38px'; cursorRing.style.borderColor = 'var(--accent)'; });
       });
     }
 
@@ -1864,7 +2490,8 @@
         if (response.ok) {
           // Success state
           submitBtn.textContent = '✓ Sent! I\'ll be in touch.';
-          submitBtn.style.background = 'var(--accent3)';
+          submitBtn.style.background = 'var(--accent2)';
+          submitBtn.style.color = '#fff';
           submitBtn.style.opacity = '1';
           form.reset(); // Clear the inputs
 
@@ -1872,6 +2499,7 @@
           setTimeout(() => {
             submitBtn.textContent = 'Send Message →';
             submitBtn.style.background = 'var(--accent)';
+            submitBtn.style.color = '#fff';
           }, 4000);
         } else {
           submitBtn.textContent = 'Error sending message.';
@@ -1880,6 +2508,7 @@
           setTimeout(() => {
             submitBtn.textContent = 'Send Message →';
             submitBtn.style.background = 'var(--accent)';
+            submitBtn.style.color = '#fff';
           }, 4000);
         }
       } catch (error) {
@@ -1889,23 +2518,10 @@
         setTimeout(() => {
           submitBtn.textContent = 'Send Message →';
           submitBtn.style.background = 'var(--accent)';
+            submitBtn.style.color = '#fff';
         }, 4000);
       }
     });
-
-    // Skill bars animate on scroll
-    const skillObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.skill-bar').forEach(bar => {
-            bar.style.animation = 'none';
-            bar.offsetHeight; // reflow
-            bar.style.animation = 'barFill 1.2s ease forwards';
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-    document.querySelectorAll('.skill-group').forEach(g => skillObserver.observe(g));
 
     // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
